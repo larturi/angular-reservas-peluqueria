@@ -1,0 +1,51 @@
+<div class="row" id="add-booking">
+  <div class="col-12">
+
+    <form [formGroup]="formBooking">
+
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="name">{{ 'label.name' | translate }}</label>
+          <input type="text" name="name" id="name" class="form-control">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="date">{{ 'label.date' | translate }}</label>
+          <p-calendar
+            [locale]="locale"
+            dateFormat="dd/mm/yy"
+            showTime="true"
+            [stepMinute]="30"
+            id="date"
+            formControlName="date"
+            [readonlyInput]="true"
+            inputStyleClass="form-control is-valid"
+            [minDate]="today">
+          </p-calendar>
+
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+          <label for="services">{{ 'label.services' | translate }}</label>
+          <select name="services" id="services" class="custom-select">
+            <option [selected]="first" *ngFor="let option of options; let first=first;" [value]="option">{{ option | translate }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12 mt-2">
+             <button type="button" class="btn btn-primary btn-block">
+              {{ 'label.add.booking' | translate }}
+             </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,13 @@
+{
+  "label.app"           : "Hairdressing Mabel",
+  "label.login"         : "Login",
+  "label.logout"        : "Logout",
+  "label.name"          : "Name",
+  "label.date"          : "Date",
+  "label.service"       : "Service",
+  "label.add.booking"   : "Add booking",
+  "hair-cut"            : "Haircut",
+  "hair-coloring"       : "Hair coloring",
+  "hair-washing"        : "Hair washing",
+  "hair-straightening"  : "Hair straightening"
+}
