@@ -9,5 +9,10 @@
   "hair-cut"            : "Corte de pelo",
   "hair-coloring"       : "Coloración de pelo",
   "hair-washing"        : "Lavado de pelo",
-  "hair-straightening"  : "Alisado de pelo"
+  "hair-straightening"  : "Alisado de pelo",
+  "label.success"       : "Exito!",
+  "label.error"         : "Error!",
+  "label.required"      : "Valor requerido",
+  "label.add.success"   : "Reserva añadida correctamente!",
+  "label.add.exists"    : "Ya existe la reserva para ese dia y horario"
 }

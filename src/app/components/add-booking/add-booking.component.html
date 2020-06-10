@@ -1,51 +1,95 @@
 <div class="row" id="add-booking">
   <div class="col-12">
 
-    <form [formGroup]="formBooking">
+    <form [formGroup]="formBooking" (ngSubmit)="addBooking()">
 
-      <div class="row form-group">
-        <div class="col-12 mt-2">
-          <label for="name">{{ 'label.name' | translate }}</label>
-          <input type="text" name="name" id="name" class="form-control">
+        <div class="row form-group">
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 mt-2">
+            <label for="name">{{ 'label.name' | translate }}</label>
+            <input type="text"
+                   name="name"
+                   formControlName="name"
+                   id="name"
+                   [ngClass]="{'is-valid': name.dirty && name.valid, 'is-invalid': name.dirty && name.invalid}"
+                   class="form-control">
+
+            <div class="invalid-feedback">
+              <span *ngIf="name.errors?.required">{{ 'label.required' | translate }}</span>
+            </div>
+
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 mt-2">
+            <label for="date">{{ 'label.date' | translate }}</label>
+            <p-calendar
+              [locale]="locale"
+              dateFormat="dd/mm/yy"
+              showTime="true"
+              [stepMinute]="30"
+              id="date"
+              formControlName="date"
+              [readonlyInput]="true"
+              inputStyleClass="form-control is-valid"
+              [minDate]="today">
+            </p-calendar>
+
+            <div class="valid-feedback">
+              <span>{{ 'label.success' | translate }}</span>
+            </div>
+
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 mt-2">
+            <label for="services">{{ 'label.service' | translate }}</label>
+            <select name="service"
+                    id="service"
+                    formControlName="service"
+                    class="custom-select is-valid">
+              <option [selected]="first" *ngFor="let option of options; let first=first;" [value]="option">{{ option | translate }}</option>
+            </select>
+
+          </div>
+
         </div>
-      </div>
 
-      <div class="row form-group">
-        <div class="col-12 mt-2">
-          <label for="date">{{ 'label.date' | translate }}</label>
-          <p-calendar
-            [locale]="locale"
-            dateFormat="dd/mm/yy"
-            showTime="true"
-            [stepMinute]="30"
-            id="date"
-            formControlName="date"
-            [readonlyInput]="true"
-            inputStyleClass="form-control is-valid"
-            [minDate]="today">
-          </p-calendar>
-
+        <div class="row form-group">
+          <div class="col-12 mt-2 no-gutters">
+            <button type="submit"
+                    [disabled]="formBooking.invalid"
+                    class="btn btn-primary btn-block">
+             {{ 'label.add.booking' | translate }}
+            </button>
         </div>
-      </div>
 
-      <div class="row form-group">
-        <div class="col-12 mt-2">
-          <label for="services">{{ 'label.services' | translate }}</label>
-          <select name="services" id="services" class="custom-select">
-            <option [selected]="first" *ngFor="let option of options; let first=first;" [value]="option">{{ option | translate }}</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="row form-group">
-        <div class="col-12 mt-2">
-             <button type="button" class="btn btn-primary btn-block">
-              {{ 'label.add.booking' | translate }}
-             </button>
-        </div>
-      </div>
+     </div>
 
     </form>
 
   </div>
 </div>
+
+<ng-template #modalSuccess let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ 'label.success' | translate }}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    {{ 'label.add.success' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #modalExists let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ 'label.error' | translate }}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    {{ 'label.add.exists' | translate }}
+  </div>
+</ng-template>

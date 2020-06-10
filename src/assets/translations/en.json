@@ -9,5 +9,10 @@
   "hair-cut"            : "Haircut",
   "hair-coloring"       : "Hair coloring",
   "hair-washing"        : "Hair washing",
-  "hair-straightening"  : "Hair straightening"
+  "hair-straightening"  : "Hair straightening",
+  "label.success"       : "Success!",
+  "label.error"         : "Error!",
+  "label.required"      : "Required",
+  "label.add.success"   : "Booking added success!",
+  "label.add.exists"    : "The booking exists with this date and time"
 }

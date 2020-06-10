@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { BookingService } from '../../services/booking.service';
+import { Booking } from '../../models/booking';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-booking',
@@ -9,13 +12,18 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 })
 export class AddBookingComponent implements OnInit {
 
+  @ViewChild('modalSuccess', {static: false}) modalSuccess;
+  @ViewChild('modalExists', {static: false}) modalExists;
+
   public options: string[] = ['hair-cut', 'hair-coloring', 'hair-washing', 'hair-straightening'];
   public locale: any;
   public today: Date;
   public formBooking: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bookingService: BookingService,
+    private modalService: NgbModal
   ) {
 
     this.today = new Date();
@@ -29,7 +37,6 @@ export class AddBookingComponent implements OnInit {
 
     this.today.setSeconds(0);
     this.today.setMilliseconds(0);
-
 
     if (navigator.language.substr(0, 2) === 'es') {
       this.locale = {
@@ -60,7 +67,7 @@ export class AddBookingComponent implements OnInit {
     }
 
     this.formBooking = this.formBuilder.group({
-      name: new FormControl(''),
+      name: new FormControl('', Validators.required),
       date: new FormControl(this.today),
       service: new FormControl(this.options[0])
     });
@@ -68,6 +75,25 @@ export class AddBookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get name() {
+    return this.formBooking.get('name');
+  }
+
+  get date() {
+    return this.formBooking.get('date');
+  }
+
+  get service() {
+    return this.formBooking.get('service');
+  }
+
+  addBooking() {
+    const booking = new Booking(this.formBooking.value);
+    this.bookingService.addBooking(booking).subscribe(data => {
+      this.modalService.open(this.modalSuccess);
+    });
   }
 
 }
