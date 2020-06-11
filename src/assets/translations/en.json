@@ -14,5 +14,11 @@
   "label.error"         : "Error!",
   "label.required"      : "Required",
   "label.add.success"   : "Booking added success!",
-  "label.add.exists"    : "The booking exists with this date and time"
+  "label.add.exists"    : "The booking exists with this date and time",
+  "label.user"          : "User",
+  "label.pass"          : "Password",
+  "label.login.error"   : "User / Password incorrect",
+  "label.login.success" : "Login success",
+  "label.list.bookings" : "Bookibg list",
+  "label.no.data"       : "No data"
 }

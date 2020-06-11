@@ -14,5 +14,11 @@
   "label.error"         : "Error!",
   "label.required"      : "Valor requerido",
   "label.add.success"   : "Reserva añadida correctamente!",
-  "label.add.exists"    : "Ya existe la reserva para ese dia y horario"
+  "label.add.exists"    : "Ya existe la reserva para ese dia y horario",
+  "label.user"          : "Usuario",
+  "label.pass"          : "Contraseña",
+  "label.login.error"   : "Usuario / Clave incorrectos",
+  "label.login.success" : "Login correcto",
+  "label.list.bookings" : "Lista de reservas",
+  "label.no.data"       : "No hay reservas"
 }

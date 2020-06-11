@@ -18,6 +18,8 @@ import { TranslateService } from './services/translate.service';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { AddBookingComponent } from './components/add-booking/add-booking.component';
+import { LoginComponent } from './components/header/login/login.component';
+import { ListBookingsComponent } from './components/list-bookings/list-bookings.component';
 
 export function translateFactory(provider: TranslateService) {
    return () => provider.getData();
@@ -28,7 +30,9 @@ export function translateFactory(provider: TranslateService) {
     AppComponent,
     TranslatePipe,
     HeaderComponent,
-    AddBookingComponent
+    AddBookingComponent,
+    LoginComponent,
+    ListBookingsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,9 @@ export function translateFactory(provider: TranslateService) {
       deps: [TranslateService],
       multi: true
     }
+  ],
+  entryComponents: [
+    LoginComponent
   ],
   bootstrap: [AppComponent]
 })

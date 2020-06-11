@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { BookingService } from '../../services/booking.service';
 import { Booking } from '../../models/booking';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-add-booking',
@@ -91,9 +94,28 @@ export class AddBookingComponent implements OnInit {
 
   addBooking() {
     const booking = new Booking(this.formBooking.value);
-    this.bookingService.addBooking(booking).subscribe(data => {
-      this.modalService.open(this.modalSuccess);
+
+    this.bookingService.getBookings().subscribe(bookings => {
+
+      const bookingFound = _.find(bookings, b => {
+        const date = new Date(b.date);
+        const dateNewBooking = new Date(booking.date);
+        return date.getTime() === dateNewBooking.getTime();
+      });
+
+      if (bookingFound) {
+        this.modalService.open(this.modalExists);
+      } else {
+        this.bookingService.addBooking(booking).subscribe(data => {
+          this.modalService.open(this.modalSuccess);
+        }, error => {
+          console.log(error);
+        });
+      }
+
     });
+
+
   }
 
 }
